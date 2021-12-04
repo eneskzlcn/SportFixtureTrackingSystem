@@ -157,3 +157,8 @@ C:\Users\enesk\Homeworks-Projects\WebDesignProgramming\SportFixtureTracking\Spor
 C:\Users\enesk\Homeworks-Projects\WebDesignProgramming\SportFixtureTracking\SportFixtureTracking\obj\Debug\net5.0\Razor\Views\Teams\Details.cshtml.g.cs
 C:\Users\enesk\Homeworks-Projects\WebDesignProgramming\SportFixtureTracking\SportFixtureTracking\obj\Debug\net5.0\Razor\Views\Teams\Edit.cshtml.g.cs
 C:\Users\enesk\Homeworks-Projects\WebDesignProgramming\SportFixtureTracking\SportFixtureTracking\obj\Debug\net5.0\Razor\Views\Teams\Index.cshtml.g.cs
+C:\Users\enesk\Homeworks-Projects\WebDesignProgramming\SportFixtureTracking\SportFixtureTracking\obj\Debug\net5.0\Razor\Views\Fixtures\Create.cshtml.g.cs
+C:\Users\enesk\Homeworks-Projects\WebDesignProgramming\SportFixtureTracking\SportFixtureTracking\obj\Debug\net5.0\Razor\Views\Fixtures\Delete.cshtml.g.cs
+C:\Users\enesk\Homeworks-Projects\WebDesignProgramming\SportFixtureTracking\SportFixtureTracking\obj\Debug\net5.0\Razor\Views\Fixtures\Details.cshtml.g.cs
+C:\Users\enesk\Homeworks-Projects\WebDesignProgramming\SportFixtureTracking\SportFixtureTracking\obj\Debug\net5.0\Razor\Views\Fixtures\Edit.cshtml.g.cs
+C:\Users\enesk\Homeworks-Projects\WebDesignProgramming\SportFixtureTracking\SportFixtureTracking\obj\Debug\net5.0\Razor\Views\Fixtures\Index.cshtml.g.cs

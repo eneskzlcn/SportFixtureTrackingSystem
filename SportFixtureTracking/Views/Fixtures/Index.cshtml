@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SportFixtureTracking.Models.Fixture>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FixtureDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FixtureHome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsFinished)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AwayTeam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeTeam)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FixtureDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FixtureHome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsFinished)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FixtureId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.FixtureId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.FixtureId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
