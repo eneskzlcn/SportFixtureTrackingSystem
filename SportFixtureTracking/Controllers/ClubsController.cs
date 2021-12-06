@@ -54,7 +54,7 @@ namespace SportFixtureTracking.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ClubId,ClubName,ClubDescription")] Club club)
-        {    
+        {
             if (ModelState.IsValid)
             {
                 _context.Add(club);

@@ -23,6 +23,25 @@ namespace SportFixtureTracking.Controllers
         {
             return View(await _context.Sports.ToListAsync());
         }
+
+        // GET: Sports/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var sport = await _context.Sports
+                .FirstOrDefaultAsync(m => m.SportId == id);
+            if (sport == null)
+            {
+                return NotFound();
+            }
+
+            return View(sport);
+        }
+
         // GET: Sports/Create
         public IActionResult Create()
         {

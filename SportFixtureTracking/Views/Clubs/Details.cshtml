@@ -4,27 +4,28 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="d-flex justify-content-center align-items-center h-100">
+    <h1 class="mb-3" style="color:aliceblue">@Model.ClubName Details</h1>
+
+</div>
 
 <div>
-    <h4>Club</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClubName)
+        <dt class="col-sm-2"  style="color:aliceblue">
+            Club Name
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10" style="color:#9d9d9d">
             @Html.DisplayFor(model => model.ClubName)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClubDescription)
+        <dt class="col-sm-2"  style="color:aliceblue">
+            Club Description
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10" style="color:#9d9d9d">
             @Html.DisplayFor(model => model.ClubDescription)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ClubId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.ClubId"  style="color:#c6ab19" >Edit</a>
 </div>

@@ -27,7 +27,7 @@ using SportFixtureTracking.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"3e527a84aaaa6b1597b9ccf5fc6fdbcc476cb606", @"/Views/Sports/Edit.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"dac45a4ddd1c8917831f68902255ae537d2ecefa", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"56a00addd179cdefeac1231a90b7fa99a4930a64", @"/Views/_ViewImports.cshtml")]
     public class Views_Sports_Edit : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<SportFixtureTracking.Models.Sport>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("text-danger"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

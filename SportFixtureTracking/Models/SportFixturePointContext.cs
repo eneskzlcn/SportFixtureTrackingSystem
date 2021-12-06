@@ -27,7 +27,8 @@ namespace SportFixtureTracking.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SportFixturePoint;Trusted_Connection=True;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SportFixturePoint;Trusted_Connection=True;");
             }
         }
 
@@ -39,8 +40,6 @@ namespace SportFixtureTracking.Models
             {
                 entity.ToTable("Club");
 
-                entity.Property(e => e.ClubId).ValueGeneratedNever();
-
                 entity.Property(e => e.ClubDescription).HasMaxLength(50);
 
                 entity.Property(e => e.ClubName)
@@ -51,8 +50,6 @@ namespace SportFixtureTracking.Models
             modelBuilder.Entity<Fixture>(entity =>
             {
                 entity.ToTable("Fixture");
-
-                entity.Property(e => e.FixtureId).ValueGeneratedNever();
 
                 entity.Property(e => e.FixtureDate).HasColumnType("date");
 
@@ -80,11 +77,9 @@ namespace SportFixtureTracking.Models
             modelBuilder.Entity<FixtureResult>(entity =>
             {
                 entity.HasKey(e => e.ResultId)
-                    .HasName("PK__FixtureR__976902087EF3B71B");
+                    .HasName("PK__tmp_ms_x__976902086C360F2F");
 
                 entity.ToTable("FixtureResult");
-
-                entity.Property(e => e.ResultId).ValueGeneratedNever();
 
                 entity.HasOne(d => d.Fixture)
                     .WithMany(p => p.FixtureResults)
@@ -102,8 +97,6 @@ namespace SportFixtureTracking.Models
             {
                 entity.ToTable("Sport");
 
-                entity.Property(e => e.SportId).ValueGeneratedNever();
-
                 entity.Property(e => e.SportDescription).HasMaxLength(50);
 
                 entity.Property(e => e.SportName)
@@ -114,8 +107,6 @@ namespace SportFixtureTracking.Models
             modelBuilder.Entity<Team>(entity =>
             {
                 entity.ToTable("Team");
-
-                entity.Property(e => e.TeamId).ValueGeneratedNever();
 
                 entity.Property(e => e.TeamName)
                     .IsRequired()
