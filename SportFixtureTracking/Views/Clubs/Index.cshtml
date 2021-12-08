@@ -7,16 +7,11 @@
     <h1 class="mb-3" style="color:aliceblue">Clubs</h1>
 
 </div>
-<p>
-    <a asp-action="Create" style="color:#386542;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;  ">
-        @*<i class="fas fa-plus-circle fa-1x " style="color:#386542"></i>*@
-        <i class="fas fa-plus fa-1x"  style="color:#386542"></i> New
-    </a>
-</p>
+
 <table class="table table-hover" style="background-color:#272727;">
     <thead>
         <tr>
-            <th style="color:aliceblue">
+            <th style="color: aliceblue; text-align: center">
                 Club Name
             </th>
             <th></th>
@@ -26,10 +21,10 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td style="color:aliceblue">
+                <td style="color: #9d9d9d; text-align: center">
                     @Html.DisplayFor(modelItem => item.ClubName)
                 </td>
-                <td style="color:aliceblue;">
+                <td style="color: aliceblue; text-align: center">
                     <a asp-action="Edit" asp-route-id="@item.ClubId">
                         <i class="fas fa-edit" style="color:#c6ab19"></i>
                     </a> |
@@ -44,4 +39,10 @@
         }
 
     </tbody>
+    
 </table>
+<div class="d-flex justify-content-center align-items-center h-100">
+    <a asp-action="Create" style="color: #c6ab19; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; ">
+        <i class="fas fa-plus fa-1x" style="color:#c6ab19;"></i> New
+    </a>
+</div>

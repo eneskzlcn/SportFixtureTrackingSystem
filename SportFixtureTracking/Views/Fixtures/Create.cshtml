@@ -4,46 +4,42 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div class="d-flex justify-content-center align-items-center h-100">
+    <h1 class="mb-3" style="color:aliceblue">Creating New Fixture</h1>
 
-<h4>Fixture</h4>
+</div>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FixtureDate" class="control-label"></label>
+                <label asp-for="FixtureDate" class="control-label" style="color:aliceblue">Date</label>
                 <input asp-for="FixtureDate" class="form-control" />
                 <span asp-validation-for="FixtureDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HomeTeamId" class="control-label"></label>
+                <label asp-for="HomeTeamId" class="control-label" style="color:aliceblue">Home Team</label>
                 <select asp-for="HomeTeamId" class ="form-control" asp-items="ViewBag.HomeTeamId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="AwayTeamId" class="control-label"></label>
+                <label asp-for="AwayTeamId" class="control-label" style="color:aliceblue">Away Team</label>
                 <select asp-for="AwayTeamId" class ="form-control" asp-items="ViewBag.AwayTeamId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="FixtureHome" class="control-label"></label>
+                <label asp-for="FixtureHome" class="control-label" style="color:aliceblue">Home</label>
                 <input asp-for="FixtureHome" class="form-control" />
                 <span asp-validation-for="FixtureHome" class="text-danger"></span>
             </div>
+         
             <div class="form-group">
-                <label asp-for="IsFinished" class="control-label"></label>
-                <input asp-for="IsFinished" class="form-control" />
-                <span asp-validation-for="IsFinished" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-info mr-3" />
+                <a asp-action="Index">
+                    <i class="fas fa-reply" style="color:coral"></i>
+                </a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

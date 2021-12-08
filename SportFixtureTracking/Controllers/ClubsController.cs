@@ -139,11 +139,28 @@ namespace SportFixtureTracking.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var club = await _context.Clubs.FindAsync(id);
+            AlsoRemoveTeams(id);
             _context.Clubs.Remove(club);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        private async void AlsoRemoveTeams(int id)
+        {
+            var teams = _context.Teams.Where(r => r.ClubId == id).ToList();
+            AlsoDeleteFixtures(teams);
+            _context.RemoveRange(teams);
+        }
+        private async void AlsoDeleteFixtures(List<Team> teams)
+        {
+            var fixtures =  _context.Fixtures.Include(r => r.AwayTeam).Include(r => r.HomeTeam).Where(a => teams.Contains(a.HomeTeam) || teams.Contains(a.AwayTeam)).ToList();
+            AlsoDeleteFixtureResults(fixtures);
+            _context.RemoveRange(fixtures);
+        }
+        private void AlsoDeleteFixtureResults(List<Fixture> fixtures)
+        {
+            var results =  _context.FixtureResults.Include(r => r.Fixture).Where(a => fixtures.Contains(a.Fixture)).ToList();
+            _context.RemoveRange(results);
+        }
         private bool ClubExists(int id)
         {
             return _context.Clubs.Any(e => e.ClubId == id);

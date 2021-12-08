@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -17,6 +18,8 @@ namespace SportFixtureTracking.Models
         public int TeamId { get; set; }
         public int ClubId { get; set; }
         public int SportId { get; set; }
+        [Required(ErrorMessage ="Team Name Can Not Be Empty")]
+        [MaxLength(20,ErrorMessage = "Team Name Can Not Be Empty")]
         public string TeamName { get; set; }
         public int PlayerCount { get; set; }
 

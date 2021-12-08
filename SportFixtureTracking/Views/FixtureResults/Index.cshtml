@@ -4,49 +4,78 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="d-flex justify-content-center align-items-center h-100">
+    <h1 class="mb-3" style="color:aliceblue">Fixture Results</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+</div>
+<table class="table table-hover" style="background-color:#272727;">
     <thead>
-        <tr>
+        <tr style="color: aliceblue; text-align: center">
             <th>
-                @Html.DisplayNameFor(model => model.HomeTeamScore)
+                Home Team
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AwayTeamScore)
+                Away Team
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Fixture)
+                Home Team Score
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WinnerTeam)
+                Away Team Score
+            </th>
+            <th>
+                Is Finished
+            </th>
+            <th>
+                Winner Team
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr style="color: aliceblue; text-align: center">
+            <td>
+                @Html.DisplayFor(modelItem => item.Fixture.HomeTeam.TeamName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fixture.AwayTeam.TeamName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HomeTeamScore)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AwayTeamScore)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fixture.IsFinished)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WinnerTeam.TeamName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ResultId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ResultId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ResultId">Delete</a>
-            </td>
+
+            @{if (item.Fixture.IsFinished.Contains('Y'))
+                {
+                    <td>
+                        <i class="fas fa-check" style="color:#26b118"></i>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WinnerTeam.TeamName)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <i class="fas fa-times" style="color:#e44141"></i>
+                    </td>
+                    <td>
+                 
+                    </td>
+                }
+
+                }
+                <td style="color: aliceblue; text-align: center">
+                    <a asp-action="Edit" asp-route-id="@item.ResultId">
+                        <i class="fas fa-edit" style="color:#c6ab19"></i>
+                    </a> |
+                    <a asp-action="Delete" asp-route-id="@item.ResultId">
+                        <i class="fas fa-trash-alt" style="color:#bb3939"></i>
+                    </a>
+                </td>
         </tr>
 }
     </tbody>

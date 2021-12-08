@@ -5,12 +5,12 @@
 }
 
 <div class="d-flex justify-content-center align-items-center h-100">
-    <h1 class="mb-3" style="color:aliceblue">Are you sure you want to delete @Model.ClubName ?</h1>
+    <h1 class="mb-3" style="color:aliceblue">Deleting @Model.ClubName </h1>
 
 </div>
 
 <div>
-    <hr style="color:aliceblue" />
+    <hr/>
     <dl class="row" >
         <dt class = "col-sm-2" style="color:aliceblue">
             Club Name 
@@ -26,8 +26,11 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="Delete" class="d-flex justify-content-center align-items-center h-100">
         <input type="hidden" asp-for="ClubId" />
-        <input type="submit" value="Delete" class="btn btn-danger" />
+        <input type="submit" value="Delete" class="btn btn-danger" style="margin-right:50px;"/>
+        <a asp-action="Index">
+            <i class="fas fa-reply" style="color:coral"></i>
+        </a>
     </form>
 </div>

@@ -21,54 +21,9 @@ namespace SportFixtureTracking.Controllers
         // GET: FixtureResults
         public async Task<IActionResult> Index()
         {
-            var sportFixturePointContext = _context.FixtureResults.Include(f => f.Fixture).Include(f => f.WinnerTeam);
+            var sportFixturePointContext = _context.FixtureResults.Include(f => f.Fixture).ThenInclude(f => f.AwayTeam).Include(f=>f.Fixture.HomeTeam)
+                .Include(f => f.WinnerTeam);
             return View(await sportFixturePointContext.ToListAsync());
-        }
-
-        // GET: FixtureResults/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var fixtureResult = await _context.FixtureResults
-                .Include(f => f.Fixture)
-                .Include(f => f.WinnerTeam)
-                .FirstOrDefaultAsync(m => m.ResultId == id);
-            if (fixtureResult == null)
-            {
-                return NotFound();
-            }
-
-            return View(fixtureResult);
-        }
-
-        // GET: FixtureResults/Create
-        public IActionResult Create()
-        {
-            ViewData["FixtureId"] = new SelectList(_context.Fixtures, "FixtureId", "IsFinished");
-            ViewData["WinnerTeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName");
-            return View();
-        }
-
-        // POST: FixtureResults/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ResultId,FixtureId,HomeTeamScore,AwayTeamScore,WinnerTeamId")] FixtureResult fixtureResult)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(fixtureResult);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FixtureId"] = new SelectList(_context.Fixtures, "FixtureId", "IsFinished", fixtureResult.FixtureId);
-            ViewData["WinnerTeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName", fixtureResult.WinnerTeamId);
-            return View(fixtureResult);
         }
 
         // GET: FixtureResults/Edit/5
@@ -79,13 +34,14 @@ namespace SportFixtureTracking.Controllers
                 return NotFound();
             }
 
-            var fixtureResult = await _context.FixtureResults.FindAsync(id);
+            //var fixtureResult = await _context.FixtureResults.FindAsync(id);
+            var fixtureResult = await _context.FixtureResults.Include(f => f.Fixture).ThenInclude(f => f.AwayTeam).Include(f => f.Fixture.HomeTeam)
+                .Include(f => f.WinnerTeam).FirstOrDefaultAsync(r=> r.ResultId == id);
             if (fixtureResult == null)
             {
                 return NotFound();
             }
-            ViewData["FixtureId"] = new SelectList(_context.Fixtures, "FixtureId", "IsFinished", fixtureResult.FixtureId);
-            ViewData["WinnerTeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName", fixtureResult.WinnerTeamId);
+            ViewData["WinnerTeamId"] = new SelectList(_context.Teams.Where(f => f.TeamId == fixtureResult.Fixture.AwayTeamId || f.TeamId == fixtureResult.Fixture.HomeTeamId), "TeamId", "TeamName", fixtureResult.WinnerTeamId);
             return View(fixtureResult);
         }
 
@@ -121,40 +77,40 @@ namespace SportFixtureTracking.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FixtureId"] = new SelectList(_context.Fixtures, "FixtureId", "IsFinished", fixtureResult.FixtureId);
+            ViewData["FixtureId"] = new SelectList(_context.Fixtures, "FixtureId", "IsFinished", fixtureResult.Fixture_Id);
             ViewData["WinnerTeamId"] = new SelectList(_context.Teams, "TeamId", "TeamName", fixtureResult.WinnerTeamId);
             return View(fixtureResult);
         }
 
-        // GET: FixtureResults/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Point()
         {
-            if (id == null)
+            var sportFixturePointContext = await _context.FixtureResults.Include(f => f.Fixture).ThenInclude(f => f.AwayTeam).Include(f => f.Fixture.HomeTeam)
+                .Include(f => f.WinnerTeam).ToListAsync();
+            var teamTotalPoints = new Dictionary<Team, int>();
+           
+          
+            foreach(var item in sportFixturePointContext)
             {
-                return NotFound();
+                if(teamTotalPoints.ContainsKey(item.Fixture.AwayTeam))
+                {
+                    teamTotalPoints[item.Fixture.AwayTeam] = teamTotalPoints[item.Fixture.AwayTeam] + Convert.ToInt32(item.AwayTeamScore);
+                }
+                else
+                {
+                    teamTotalPoints[item.Fixture.AwayTeam] = Convert.ToInt32(item.AwayTeamScore);
+                }
+                if(teamTotalPoints.ContainsKey(item.Fixture.HomeTeam))
+                {
+                    teamTotalPoints[item.Fixture.HomeTeam] = teamTotalPoints[item.Fixture.HomeTeam] + Convert.ToInt32(item.HomeTeamScore);
+                }
+                else
+                {
+                    teamTotalPoints[item.Fixture.HomeTeam] = Convert.ToInt32(item.HomeTeamScore);
+                }
             }
-
-            var fixtureResult = await _context.FixtureResults
-                .Include(f => f.Fixture)
-                .Include(f => f.WinnerTeam)
-                .FirstOrDefaultAsync(m => m.ResultId == id);
-            if (fixtureResult == null)
-            {
-                return NotFound();
-            }
-
-            return View(fixtureResult);
-        }
-
-        // POST: FixtureResults/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var fixtureResult = await _context.FixtureResults.FindAsync(id);
-            _context.FixtureResults.Remove(fixtureResult);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+           
+            ViewData["TeamPointPairs"] = teamTotalPoints;
+            return View(nameof(Point));
         }
 
         private bool FixtureResultExists(int id)

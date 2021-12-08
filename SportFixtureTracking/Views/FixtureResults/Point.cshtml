@@ -1,0 +1,42 @@
+﻿
+
+@{
+    Dictionary<Team, int> TeamPointPairs = ViewData["TeamPointPairs"] as Dictionary<Team, int>;
+    
+}
+
+<div class="d-flex justify-content-center align-items-center h-100">
+    <h1 class="mb-3" style="color:aliceblue">Point Table</h1>
+
+</div>
+
+<table class="table table-hover" style="background-color:#272727;">
+    <thead>
+        <tr style="color: aliceblue; text-align: center">
+            <th>
+                Team
+            </th>
+            <th>
+                Point
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in TeamPointPairs)
+        {
+            <tr style="color: aliceblue; text-align: center">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Key.TeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>
+                    
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

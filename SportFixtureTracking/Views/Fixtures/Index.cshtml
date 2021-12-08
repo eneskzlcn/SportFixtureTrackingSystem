@@ -4,56 +4,70 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="d-flex justify-content-center align-items-center h-100">
+    <h1 class="mb-3" style="color:aliceblue">Fixtures</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FixtureDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FixtureHome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsFinished)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AwayTeam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HomeTeam)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+</div>
+<div class="form-inline">
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FixtureDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FixtureHome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsFinished)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.FixtureId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.FixtureId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.FixtureId">Delete</a>
-            </td>
-        </tr>
+
+    <div class="card text-center" style="background-color:#272727;color:aliceblue;margin-left:10px;margin-bottom:10px;" >
+        <div class="card-header">
+            @item.FixtureDate.ToString("dddd, dd MMMM")
+            
+        </div>
+        <div class="card-body" style="background-color:#272727;">
+            <h5 class="card-title">
+                @item.HomeTeam.TeamName - @item.AwayTeam.TeamName 
+            </h5>
+            <p class="card-text text-muted">
+                @item.FixtureHome
+            </p>
+            <p>
+                <a asp-action="Edit" asp-route-id="@item.FixtureId">
+                    <i class="fas fa-edit" style="color:#c6ab19"></i>
+                </a> |
+                <a asp-action="Delete" asp-route-id="@item.FixtureId">
+                    <i class="fas fa-trash-alt" style="color:#bb3939"></i>
+                </a>
+            </p>
+        </div>
+        <div class="card-footer text-muted">
+
+            @{ if (DateTime.Compare(item.FixtureDate, DateTime.Now) > 0)
+                { // if fixture date is later than now,
+                    <p>
+                        After @DateTime.Now.Subtract(item.FixtureDate).ToString("dd") Day
+                    </p>
+                }
+
+                else if (DateTime.Compare(item.FixtureDate, DateTime.Now) == 0)
+                {
+                    <p>
+                        Today
+                    </p>
+                }
+                else if (DateTime.Compare(item.FixtureDate, DateTime.Now) < 0)
+                {
+                    <p >
+                        @DateTime.Now.Subtract(item.FixtureDate).ToString("dd") Day Ago 
+                        -
+                        
+                        <a asp-action="Index" asp-route-id="" asp-controller="FixtureResults" style="color:#c6ab19;">
+                            View Result
+                        </a>
+                    </p>
+                }
+            }
+
+
+        </div>
+    </div>
 }
-    </tbody>
-</table>
+ </div>
+   
+<div class="d-flex justify-content-center align-items-center h-100">
+    <a asp-action="Create" style="color: #c6ab19; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; ">
+        <i class="fas fa-plus fa-1x" style="color: #c6ab19;"></i> New
+    </a>
+</div>
